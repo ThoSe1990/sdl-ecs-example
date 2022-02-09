@@ -34,33 +34,33 @@ https://www.libsdl.org/projects/SDL_image/
 ### spdlog 
 
 Clone the spdlog git repository and build it. Set `CMAKE_INSTALL_DIRECTORY` to the desired install location.
-
+````
 git clone https://github.com/gabime/spdlog.git
 cd spdlog 
 cmake -S . -B ./build -DCMAKE_INSTALL_PREFIX=<your install location>
 cmake --build ./build
 cmake --install ./build
-
+````
   
 ### Gtest
 
 Like spdlog, download and bulid googletest from GitHub. Set `CMAKE_INSTALL_DIRECTORY` to the desired install location.
-  
+ ```` 
 git clone https://github.com/google/googletest.git
 cd googletest
 cmake -S . -B ./build -DCMAKE_INSTALL_PREFIX=<your install location>
 cmake --build ./build
 cmake --install ./build
-
+````
 
 ### Running CMake In Windows
 Compared to Linux builds, where we find the dev libraries on the filesystem, set following variables on Windows for CMake.
-  
+````
 -DSDL2_PATH="C:\Projects\extern\SDL2-2.0.20\x86_64-w64-mingw32"
 -DSDL2_IMAGE_PATH="C:\Projects\extern\SDL2_image-2.0.5\x86_64-w64-mingw32"
 -Dspdlog_DIR="C:\Projects\extern\spdlog\build\out\lib\cmake\spdlog"
 -DGTEST_ROOT="C:\\location"
-
+````
 The CMake command from the project directory would look like:
 ````
 cmake -S . -B ./build -G "MinGW Makefiles" \
