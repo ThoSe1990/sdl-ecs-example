@@ -5,18 +5,31 @@ Welcome to my 2D game engine. This is a blog series from [CodingWithThomas](http
 - ... 
 - ...
 
-## Project Setup: External Dependencies
+## Linux Build
 
-The project has some external dependencies and optional tooling for development. All external libraries and tools are listed here.
+Install following libraries to run Linux (Ubuntu) builds
+````bash
+sudo apt install libsdl2-dev
+sudo apt install libsdl2-image-dev
+sudo apt install libsdl2-ttf-dev
+sudo apt install libspdlog-dev
+sudo apt-get install libgtest-dev
+````
+Then navigate in the project directory and run cmake:
+````bash
+cmake -S . -B ./build
+cmake --build ./build
+````
 
-## SDL
-The game engine uses SDL as its media layer.  
-downlaods:
+
+## Windows Build
+
+Download prebuild SDL and put it in a location you want.
+
 https://www.libsdl.org/download-2.0.php
 https://www.libsdl.org/projects/SDL_image/
 
-sdl
-https://github.com/tcbrindle/sdl2-cmake-scripts
+
 set(SDL2_PATH "C:\Projects\extern\SDL2-2.0.20\x86_64-w64-mingw32")
 set(SDL2_IMAGE_PATH "C:\Projects\extern\SDL2_image-2.0.5\x86_64-w64-mingw32")
 
