@@ -13,6 +13,8 @@ target_link_libraries(gtest
 )
 set_target_properties(${target} PROPERTIES CXX_CLANG_TIDY "")
 
+add_test(NAME ${target} COMMAND ${target})
+
 if(ENABLE_COVERAGE)
     set(CMAKE_BUILD_TYPE Debug)
     if(CMAKE_COMPILER_IS_GNUCXX)

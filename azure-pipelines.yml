@@ -17,6 +17,7 @@ steps:
     sudo apt install libsdl2-image-dev
     sudo apt install libsdl2-ttf-dev
     sudo apt install libsdl2-mixer-dev
+    cmake -S . -B ./build
     cmake --build ./build
   displayName: 'ubuntu gcc build'
 
