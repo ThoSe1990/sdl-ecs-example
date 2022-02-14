@@ -13,6 +13,7 @@ steps:
 - script: | 
     sudo apt-get update
     sudo apt-get install build-essential
+    sudo apt-get install libspdlog-dev
     sudo apt install libsdl2-dev
     sudo apt install libsdl2-image-dev
     sudo apt install libsdl2-ttf-dev
