@@ -1,3 +1,5 @@
+
+[![Build Status](https://dev.azure.com/thomassedlmair/cwt-2d-game-engine/_apis/build/status/ThoSe1990.cwt_game_engine?branchName=main)](https://dev.azure.com/thomassedlmair/cwt-2d-game-engine/_build/latest?definitionId=10&branchName=main)
 # CWT 2D Game Engine
 
 Welcome to my 2D game engine. This is a blog series from [CodingWithThomas](https://www.codingwiththomas.com/). You can find all articles in the following links and they are tagged in this repository accordingly:
