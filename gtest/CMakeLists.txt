@@ -1,11 +1,11 @@
 
-
 set(target gtest)
 
 add_executable(${target}
     ${CMAKE_CURRENT_SOURCE_DIR}/test.cc
 )
 target_link_libraries(gtest
+    precompiled_headers_gtest    
     project_warnings
     spdlog::spdlog
     GTest::Main

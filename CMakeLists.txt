@@ -4,10 +4,6 @@ project(cwt-game-engine)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -23,11 +19,13 @@ include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
 
+option(ENABLE_PRECOMPILED_HEADERS "pre compile system headers ON/OFF" OFF)
 add_library(precompiled_headers INTERFACE)
-target_precompile_headers(precompiled_headers INTERFACE
-  ${PROJECT_SOURCE_DIR}/src/cwt_pch/cwt_pch.hpp
-)
-
+add_library(precompiled_headers_gtest INTERFACE)
+if(ENABLE_PRECOMPILED_HEADERS)
+  target_precompile_headers(precompiled_headers INTERFACE ${PROJECT_SOURCE_DIR}/src/cwt_pch/cwt_pch.hpp)
+  target_precompile_headers(precompiled_headers_gtest INTERFACE ${PROJECT_SOURCE_DIR}/gtest/cwt_gtest.hpp)
+endif()
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)

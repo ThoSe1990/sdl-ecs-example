@@ -1,8 +1,7 @@
 
-#include <gtest/gtest.h>
+#include "cwt_gtest.hpp"
 
-
-TEST(one, test) 
+TEST(test, test) 
 {
-    std::cout << "hello\n";
+    std::cout << "hello gtest\n";
 }

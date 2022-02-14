@@ -16,6 +16,5 @@ target_include_directories(${target} PUBLIC
 target_link_libraries(${target} 
     spdlog::spdlog
     ${SDL2_LIBRARY}
-    precompiled_headers
 )
 
