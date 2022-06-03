@@ -35,7 +35,7 @@ https://www.libsdl.org/projects/SDL_image/
 
 ### spdlog 
 
-Clone the spdlog git repository and build it. Set `CMAKE_INSTALL_DIRECTORY` to the desired install location. On my private computer I use in general the build directory and place them in out.
+Clone the spdlog git repository and build it. Set `CMAKE_INSTALL_DIRECTORY` to the desired install location. On my private computer I use in general `./build/out` as install directory.
 ````
 git clone https://github.com/gabime/spdlog.git
 cd spdlog 
@@ -76,7 +76,3 @@ cmake --install ./build
 ````
 
 Run the executable in the install directory und you'll see an empty SDL windows for a couple of seconds. 
-
-# Build Options and Tools
-
-
