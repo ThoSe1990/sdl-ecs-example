@@ -1,4 +1,5 @@
+.vscode
 build
 build*
-
-cmake -S . -B ./build -G "MinGW Makefiles" -DSDL2_PATH:FILEPATH="C:\\git\\extern\\SDL2-2.0.20\\x86_64-w64-mingw32" -DSDL2_IMAGE_PATH:FILEPATH="C:\\git\\extern\\SDL2_image-2.0.5\\x86_64-w64-mingw32" -Dspdlog_DIR:FILEPATH="C:\\git\\extern\\spdlog\\build\\out\\lib\\cmake\\spdlog" -DGTEST_ROOT:FILEPATH="C:\\git\\extern\\googletest\\build\\out"
+*.note
+*.cmd

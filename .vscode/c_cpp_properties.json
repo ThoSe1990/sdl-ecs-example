@@ -3,10 +3,10 @@
       "myDefaultIncludePath": [
         "${workspaceFolder}", 
         "${workspaceFolder}/src",
-        "C:\\Projects\\extern\\SDL2-2.0.20\\x86_64-w64-mingw32\\include\\SDL2",
-        "C:\\Projects\\extern\\SDL2_image-2.0.5\\x86_64-w64-mingw32\\include\\SDL2",
-        "C:\\Projects\\extern\\spdlog\\build\\out\\include",
-        "C:\\Projects\\extern\\googletest\\build\\out\\include"
+        "C:\\git\\extern\\SDL2-2.0.20\\x86_64-w64-mingw32\\include\\SDL2",
+        "C:\\git\\extern\\SDL2_image-2.0.5\\x86_64-w64-mingw32\\include\\SDL2",
+        "C:\\git\\extern\\spdlog\\build\\out\\include",
+        "C:\\git\\extern\\googletest\\build\\out\\include"
       ]
     },
     "configurations": [
