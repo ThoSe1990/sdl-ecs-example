@@ -2,7 +2,7 @@
 set(target cwt_game_engine)
 
 add_library(${target} STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/game.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine.cpp
 ) 
 
 
