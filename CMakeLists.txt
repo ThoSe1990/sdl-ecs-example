@@ -4,33 +4,30 @@ project(cwt-game-engine)
 
 set(CMAKE_BUILD_TYPE Debug)
 
+set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+if(MSVC)
+    add_compile_options(
+        $<$<CONFIG:>:/MT> 
+        $<$<CONFIG:Debug>:/MTd>
+        $<$<CONFIG:Release>:/MT>
+    )
+endif()
+
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
-option(ENABLE_COVERAGE "Create Coverage Report ON/OFF" OFF) 
 include(cmake/StaticAnalyzers.cmake)
-include(cmake/CodeCoverage.cmake)
-include(cmake/FindSDL2.cmake)
-include(cmake/FindSDL2_image.cmake)
 
 add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
-
-
-option(ENABLE_PRECOMPILED_HEADERS "pre compile system headers ON/OFF" OFF)
-add_library(precompiled_headers INTERFACE)
-add_library(precompiled_headers_gtest INTERFACE)
-if(ENABLE_PRECOMPILED_HEADERS)
-  target_precompile_headers(precompiled_headers INTERFACE ${PROJECT_SOURCE_DIR}/src/cwt_pch/cwt_pch.hpp)
-  target_precompile_headers(precompiled_headers_gtest INTERFACE ${PROJECT_SOURCE_DIR}/gtest/cwt_gtest.hpp)
-endif()
-
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(spdlog REQUIRED)
-find_package(GTest REQUIRED)
 
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/cwt_game_engine)
