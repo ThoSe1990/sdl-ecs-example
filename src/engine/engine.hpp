@@ -9,7 +9,7 @@
 
 namespace cwt {
 
-template<typename Window> 
+template<typename WindowType, typename SceneType> 
 class engine
 {
 public: 
@@ -20,6 +20,8 @@ public:
     void on_update()
     {
         m_window.on_update(CWT_BIND_MEMBERFUNCTION(on_event));
+        // all systems: .update(m_active_scene.get_registry())
+        m_window.on_render(m_active_scene);
     }
 
     void on_event(event& e)
@@ -37,7 +39,8 @@ private:
     }
 
 private:
-    Window m_window;
+    WindowType m_window;
+    SceneType m_active_scene;
     bool m_is_running = true;
 };
 

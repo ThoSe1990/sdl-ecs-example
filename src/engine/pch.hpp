@@ -9,6 +9,6 @@
 #include <unordered_map>
 
 #include <SDL.h>
-// #include <SDL_image.h>
+#include <SDL_image.h>
 
 #include <spdlog/spdlog.h>

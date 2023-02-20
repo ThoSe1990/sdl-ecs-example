@@ -3,21 +3,38 @@
 namespace cwt
 {
 
+    class sdl_scene 
+    {
+    public:
+        void on_update()
+        {
+
+        }
+
+        void on_render(SDL_Renderer* renderer)
+        {
+            SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
+            SDL_RenderClear(renderer);
+
+            auto src = SDL_Rect{0, 0, 300, 230};
+            auto dst = SDL_Rect{10, 10, 80, 60}; 
+            auto texture = IMG_LoadTexture(renderer, "D:\\git\\cwt_game_engine\\src\\playground\\bird_up.png");
+            SDL_RenderCopy(renderer, texture, &src, &dst);
+
+            SDL_RenderPresent(renderer);
+        }
+    private:
+    private:
+        // registry 
+    };
 
     class sdl_window 
-    {
-    private:
-        std::size_t m_width;
-        std::size_t m_height;
-
-        SDL_Window* m_window; 
-        SDL_Renderer* m_renderer;
-        
+    {    
     public:
         sdl_window()
         {
             m_window = SDL_CreateWindow(
-                "cwt game engine SDL2 window",                  // window title
+                "cwt game engine - SDL2 window",                  // window title
                 SDL_WINDOWPOS_UNDEFINED,           // initial x position
                 SDL_WINDOWPOS_UNDEFINED,           // initial y position
                 640,                               // width, in pixels
@@ -34,13 +51,11 @@ namespace cwt
                 return;
             }
         }
-
         ~sdl_window()
         {       
             SDL_DestroyWindow(m_window);
             SDL_Quit();
         }
-
 
         template<typename EventCallback>
         void on_update(EventCallback&& event_callback) 
@@ -63,11 +78,20 @@ namespace cwt
                     break;
                 }
             }
-
-            SDL_SetRenderDrawColor(m_renderer, 21, 21, 21, 255);
-            SDL_RenderClear(m_renderer);
-            SDL_RenderPresent(m_renderer);
         }
 
+        void on_render(sdl_scene& active_scene)
+        {
+            active_scene.on_render(m_renderer);
+        }
+    private: 
+
+    private:
+        std::size_t m_width;
+        std::size_t m_height;
+        SDL_Window* m_window; 
+        SDL_Renderer* m_renderer;
     };
+
+
 } // namespace cwt
