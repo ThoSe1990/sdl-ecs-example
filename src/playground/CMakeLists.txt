@@ -11,8 +11,7 @@ target_include_directories(${target} PUBLIC
 )
 
 target_link_libraries(${target} 
-${CONAN_LIBS}    
-cwt_game_engine
+${CONAN_LIBS} 
 )
 
 

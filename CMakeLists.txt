@@ -30,7 +30,7 @@ include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/src/cwt_game_engine)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/engine)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/playground)
 
 enable_testing()

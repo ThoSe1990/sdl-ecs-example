@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cwt_pch/cwt_pch.hpp"
+#include "pch.hpp"
 
 #include "event/event.hpp"
 #include "event/window_events.hpp"
@@ -9,11 +9,11 @@
 
 namespace cwt {
 
-template<typename Window>
+template<typename T> 
 class engine
 {
 private:
-    Window m_window;
+    T m_window;
     bool m_is_running = true;
     
 public: 
