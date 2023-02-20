@@ -9,15 +9,10 @@
 
 namespace cwt {
 
-template<typename T> 
+template<typename Window> 
 class engine
 {
-private:
-    T m_window;
-    bool m_is_running = true;
-    
 public: 
-
     bool is_running()
     {
         return m_is_running;
@@ -40,6 +35,10 @@ private:
     {
         this->m_is_running = false;
     }
+
+private:
+    Window m_window;
+    bool m_is_running = true;
 };
 
 
