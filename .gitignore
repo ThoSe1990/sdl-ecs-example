@@ -3,3 +3,4 @@ build
 build*
 *.note
 *.cmd
+bird.hpp

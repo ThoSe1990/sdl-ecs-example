@@ -21,4 +21,9 @@ endif()
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+
+if(MSVC) 
+    configure_file(${CONAN_BIN_DIRS_LIBTIFF}/tiffd.dll ${CMAKE_BINARY_DIR}/bin/tiffd.dll COPYONLY)
+endif()
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
