@@ -2,39 +2,13 @@
 
 namespace cwt
 {
-
-    class sdl_scene 
-    {
-    public:
-        void on_update()
-        {
-
-        }
-
-        void on_render(SDL_Renderer* renderer)
-        {
-            SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
-            SDL_RenderClear(renderer);
-
-            auto src = SDL_Rect{0, 0, 300, 230};
-            auto dst = SDL_Rect{10, 10, 80, 60}; 
-            auto texture = IMG_LoadTexture(renderer, "D:\\git\\cwt_game_engine\\src\\playground\\bird_up.png");
-            SDL_RenderCopy(renderer, texture, &src, &dst);
-
-            SDL_RenderPresent(renderer);
-        }
-    private:
-    private:
-        // registry 
-    };
-
     class sdl_window 
     {    
     public:
         sdl_window()
         {
             m_window = SDL_CreateWindow(
-                "cwt game engine - SDL2 window",                  // window title
+                "sdl window",                  // window title
                 SDL_WINDOWPOS_UNDEFINED,           // initial x position
                 SDL_WINDOWPOS_UNDEFINED,           // initial y position
                 640,                               // width, in pixels
@@ -57,33 +31,23 @@ namespace cwt
             SDL_Quit();
         }
 
+        SDL_Renderer* get_renderer() { return m_renderer; }
+
+
         template<typename EventCallback>
         void on_update(EventCallback&& event_callback) 
         {
             SDL_Event sdl_event;
             SDL_PollEvent(&sdl_event);
-            switch (sdl_event.type) {
-                case SDL_QUIT: {
-                    close_window_event e;
-                    event_callback(e);
-                    break;
-                }
-                case SDL_KEYDOWN: {
-                    if (sdl_event.key.keysym.sym == SDLK_ESCAPE) {
-                        close_window_event e;
-                        event_callback(e);
-                    }
-                }
-                default: {
-                    break;
-                }
+            SDL_GetKeyboardState(NULL);
+            
+            const Uint8* keystates = SDL_GetKeyboardState(NULL);
+            if (keystates[SDL_SCANCODE_ESCAPE]) {
+                close_window_event e;
+                event_callback(e);
             }
         }
 
-        void on_render(sdl_scene& active_scene)
-        {
-            active_scene.on_render(m_renderer);
-        }
     private: 
 
     private:

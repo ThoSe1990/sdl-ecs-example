@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.16)
-project(cwt-game-engine)
+project(sdl-ecs-example)
 
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -22,16 +22,7 @@ endif()
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
-include(cmake/StaticAnalyzers.cmake)
-
-add_library(project_warnings INTERFACE)
-include(cmake/CompilerWarnings.cmake)
-set_project_warnings(project_warnings)
 
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/src/engine)
-add_subdirectory(${PROJECT_SOURCE_DIR}/src/playground)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
-enable_testing()
-add_subdirectory(${PROJECT_SOURCE_DIR}/gtest)

@@ -2,13 +2,6 @@
 sdl/2.24.0
 sdl_image/2.0.5
 entt/3.11.0
-lua/5.3.6
-sol2/3.2.1
-gtest/1.13.0
-spdlog/1.9.2
 
 [generators]
 cmake
-
-[options]
-gtest:no_main=True

@@ -5,23 +5,20 @@
 #include "event/event.hpp"
 #include "event/window_events.hpp"
 
-#include "window.hpp"
+#include "sdl_window.hpp"
 
 namespace cwt {
 
-template<typename WindowType, typename SceneType> 
-class engine
+class game
 {
 public: 
     bool is_running()
     {
         return m_is_running;
     }
-    void on_update()
+    void update()
     {
         m_window.on_update(CWT_BIND_MEMBERFUNCTION(on_event));
-        // all systems: .update(m_active_scene.get_registry())
-        m_window.on_render(m_active_scene);
     }
 
     void on_event(event& e)
@@ -39,8 +36,7 @@ private:
     }
 
 private:
-    WindowType m_window;
-    SceneType m_active_scene;
+    sdl_window m_window;
     bool m_is_running = true;
 };
 
