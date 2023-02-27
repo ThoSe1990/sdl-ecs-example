@@ -1,14 +1,14 @@
-# CWT 2D Game Engine
+# An Entity-Component-System Example With SDL
 
-Welcome to my 2D game engine. This is a blog series from [CodingWithThomas](https://www.codingwiththomas.com/). You can find all articles in the following links and they are tagged in this repository accordingly:
+..
 
-- ... 
-- ...
+## Build
 
-## Coming Soon ... 
-
-Build commands: 
-
+Use conan to build this example. If you haven't install conan, use `pip` to install: 
+```
+pip install conan==1.57.0
+```
+And then run the build commands. Note: I know there is already conan 2.0, but I haven't found time yet to check it out, so please stick to a version below 2.0
 ```
 conan install . -if ./build --build missing
 cmake -S . -B ./build
