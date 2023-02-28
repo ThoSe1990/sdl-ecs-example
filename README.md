@@ -1,6 +1,8 @@
 # An Entity-Component-System Example With SDL
 
-..
+This is an example of an entity component system implemented as prototype by using unordered maps. Find the corresponding blog post here: 
+
+https://www.codingwiththomas.com/blog/an-entity-component-system-from-scratch
 
 ## Build
 
