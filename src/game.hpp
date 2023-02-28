@@ -106,7 +106,6 @@ struct movement_system
             } 
         }
     }
-    
 };
 
 
@@ -155,7 +154,7 @@ class game
             SDL_PollEvent(&sdl_event);            
             const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
-            if (keystates[SDL_SCANCODE_ESCAPE]) {
+            if (keystates[SDL_SCANCODE_ESCAPE] || sdl_event.type == SDL_QUIT) {
                 m_is_running = false;
             }
         }
@@ -173,12 +172,12 @@ class game
 
             SDL_RenderPresent(m_renderer);
         }
-SDL_Renderer* m_renderer;
+
     private:
         std::size_t m_width;
         std::size_t m_height;
         SDL_Window* m_window; 
-        
+        SDL_Renderer* m_renderer;
         bool m_is_running;
 
         registry m_registry;
@@ -186,7 +185,6 @@ SDL_Renderer* m_renderer;
         sprite_system m_sprite_system;
         transform_system m_transform_system;
         movement_system m_movement_system;
-
 };
 
 
