@@ -8,21 +8,13 @@
 #include <algorithm>
 #include <unordered_map>
 
+#include <entt/entt.hpp>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
 
 namespace cwt {
-
-using entity = std::size_t;
-entity max_entity = 0;
-std::size_t create_entity()
-{
-    static std::size_t entities = 0;
-    ++entities;
-    max_entity = entities;
-    return entities;
-}
 
 struct sprite_component{
     SDL_Rect src;
@@ -40,35 +32,29 @@ struct transform_component{
 struct keyinputs_component{ };
 
 
-struct registry {
-    std::unordered_map<entity, sprite_component> sprites;
-    std::unordered_map<entity, transform_component> transforms;
-    std::unordered_map<entity, keyinputs_component> keys;
-};
+
 
 struct sprite_system 
 {
-    void update(registry& reg)
+    void update(entt::registry& reg)
     {
-        for (int e = 1 ; e <= max_entity ; e++) {
-            if (reg.sprites.contains(e) && reg.transforms.contains(e)){
-                reg.sprites[e].dst.x = reg.transforms[e].pos_x;
-                reg.sprites[e].dst.y = reg.transforms[e].pos_y;
-            }
-        }
+        auto view = reg.view<sprite_component, transform_component>();
+        view.each([](auto &s, auto &t){
+                s.dst.x = t.pos_x;
+                s.dst.y = t.pos_y;
+        });
     }
-    void render(registry& reg, SDL_Renderer* renderer)
+    void render(entt::registry& reg, SDL_Renderer* renderer)
     {
-        for (int e = 1 ; e <= max_entity ; e++) {
-            if (reg.sprites.contains(e)){
-                SDL_RenderCopy(
+        auto view = reg.view<sprite_component>();
+        view.each([renderer](auto &s){
+             SDL_RenderCopy(
                     renderer, 
-                    reg.sprites[e].texture, 
-                    &reg.sprites[e].src, 
-                    &reg.sprites[e].dst
+                    s.texture, 
+                    &s.src, 
+                    &s.dst
                 );
-            }
-        }
+        });
     }
 };
 
@@ -76,35 +62,31 @@ struct transform_system
 {
     float dt = 0.1f;
     
-    void update(registry& reg)
+    void update(entt::registry& reg)
     {
-        for (int e = 1 ; e <= max_entity ; e++) {
-            if (reg.transforms.contains(e)){
-                reg.transforms[e].pos_x += reg.transforms[e].vel_x*dt;
-                reg.transforms[e].pos_y += reg.transforms[e].vel_y*dt;
-            }
-        }
+        auto view = reg.view<transform_component>();
+        view.each([](auto &t){
+            t.pos_x += t.vel_x*0.1f;
+            t.pos_y += t.vel_y*0.1f;            
+        });
     }
 };
 
 struct movement_system 
 {  
-    void update(registry& reg)
+    void update(entt::registry& reg)
     {
         const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-        for (int e = 1 ; e <= max_entity ; e++) {
-            if (reg.transforms.contains(e) && reg.keys.contains(e)){
-                
-                if (keys[SDL_SCANCODE_A]) { reg.transforms[e].vel_x = -1.0f; } 
-                if (keys[SDL_SCANCODE_S]) { reg.transforms[e].vel_y = 1.0f; }
-                if (keys[SDL_SCANCODE_W]) { reg.transforms[e].vel_y = -1.0f; }
-                if (keys[SDL_SCANCODE_D]) { reg.transforms[e].vel_x = 1.0f; }
-                
-                if (!keys[SDL_SCANCODE_A] && !keys[SDL_SCANCODE_D]) { reg.transforms[e].vel_x = 0.0f; }
-                if (!keys[SDL_SCANCODE_S] && !keys[SDL_SCANCODE_W]) { reg.transforms[e].vel_y = 0.0f; }
-            } 
-        }
+        auto view = reg.view<transform_component, keyinputs_component>();
+        view.each([&keys](auto &t){
+            if (keys[SDL_SCANCODE_A]) { t.vel_x = -1.0f; } 
+            if (keys[SDL_SCANCODE_S]) { t.vel_y = 1.0f; }
+            if (keys[SDL_SCANCODE_W]) { t.vel_y = -1.0f; }
+            if (keys[SDL_SCANCODE_D]) { t.vel_x = 1.0f; }
+            if (!keys[SDL_SCANCODE_A] && !keys[SDL_SCANCODE_D]) { t.vel_x = 0.0f; }
+            if (!keys[SDL_SCANCODE_S] && !keys[SDL_SCANCODE_W]) { t.vel_y = 0.0f; }       
+        });
     }
 };
 
@@ -141,7 +123,7 @@ class game
             SDL_Quit();
         }
 
-        registry& get_registry() { return m_registry; }
+        entt::registry& get_registry() { return m_registry; }
         SDL_Renderer* get_renderer() { return m_renderer; }
 
         bool is_running()
@@ -180,7 +162,7 @@ class game
         SDL_Renderer* m_renderer;
         bool m_is_running;
 
-        registry m_registry;
+        entt::registry m_registry;
 
         sprite_system m_sprite_system;
         transform_system m_transform_system;
