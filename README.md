@@ -1,9 +1,9 @@
 # An Entity-Component-System Example With SDL
 
-This is an example of an entity component system implemented as prototype by using unordered maps. Find the corresponding blog post here: 
+This is an example of an entity component system, on the first draft implemented as prototype by using unordered maps and on the current state I'm using EnTT. Find the corresponding blog posts here: 
 
-https://www.codingwiththomas.com/blog/an-entity-component-system-from-scratch
-
+- Naive prototype for ECS: https://www.codingwiththomas.com/blog/an-entity-component-system-from-scratch
+- EnTT: https://www.codingwiththomas.com/blog/use-entt-when-you-need-an-ecs
 ## Build
 
 Use conan to build this example. If you haven't install conan, use `pip` to install: 
