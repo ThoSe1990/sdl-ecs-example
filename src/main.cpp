@@ -1,35 +1,27 @@
+#include "assets.hpp"
 #include "game.hpp"
-#include "bird.hpp"
 
 
 int main(int argc, char* argv[]) 
 {
     cwt::game game(800, 600);
 
-    auto bird_1 = game.get_registry().create();
-    game.get_registry().emplace<cwt::sprite_component>(bird_1, 
-        SDL_Rect{0, 0, 300, 230}, 
-        SDL_Rect{10, 10, 100, 73}, 
-        IMG_LoadTexture(game.get_renderer(), bird_path)
+    auto bar = game.get_registry().create();
+    game.get_registry().emplace<cwt::sprite_component>(bar, 
+        SDL_Rect{0, 0, 50, 50}, 
+        SDL_Rect{10, 10, 30, 110}, 
+        IMG_LoadTexture(game.get_renderer(), orange_path)
     );
-    game.get_registry().emplace<cwt::transform_component>(bird_1, 10.0f, 10.0f, 0.0f, 0.0f);
-    game.get_registry().emplace<cwt::keyinputs_component>(bird_1);
-    
+    game.get_registry().emplace<cwt::transform_component>(bar, 10.0f, 10.0f, 0.0f, 0.0f);
+    game.get_registry().emplace<cwt::collider_component>(bar, 10.0f);
+    game.get_registry().emplace<cwt::key_input_component>(bar);
 
-    auto bird_2 = game.get_registry().create();
-    game.get_registry().emplace<cwt::sprite_component>(bird_2, 
-        SDL_Rect{0, 0, 300, 230}, 
-        SDL_Rect{0, 0, 100, 73}, 
-        IMG_LoadTexture(game.get_renderer(), bird_path)
-    );
-    game.get_registry().emplace<cwt::transform_component>(bird_2, 10.0f, 500.0f, 0.01f, -0.01f);
+    auto player = game.get_registry().create();
+    game.get_registry().emplace<cwt::player_component>(player, std::size_t{0}, cwt::player_type::left);
 
-    auto bird_3 = game.get_registry().create();
-    game.get_registry().emplace<cwt::sprite_component>(bird_3, 
-        SDL_Rect{0, 0, 300, 230}, 
-        SDL_Rect{200, 300, 100, 73}, 
-        IMG_LoadTexture(game.get_renderer(), bird_path)
-    );
+    auto opponent = game.get_registry().create();
+    game.get_registry().emplace<cwt::player_component>(opponent, std::size_t{0}, cwt::player_type::right);
+
 
     while(game.is_running()) 
     {

@@ -1,0 +1,5 @@
+#pragma once 
+
+const char* bird_path = "${BIRD_PATH}";
+const char* blue_path = "${BLUE_PATH}";
+const char* orange_path = "${ORANGE_PATH}";
