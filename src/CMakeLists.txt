@@ -8,6 +8,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/assets/assets.hpp.in ${CMAKE_CURRENT_
 
 add_executable(${target}
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/bindings/imgui_impl_sdl.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/bindings/imgui_impl_sdlrenderer.cpp 
 )
 
 target_include_directories(${target} PUBLIC
